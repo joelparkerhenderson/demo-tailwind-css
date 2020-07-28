@@ -90,10 +90,10 @@ npx tailwindcss build src/styles.css -o build/output.css
 Install:
 
 ```sh
-npm install --global gulp-cli
+npm install --save-dev gulp-cli
 npm install --save-dev gulp
-npm install gulp-postcss --save-dev
-npm install autoprefixer --save-dev
+npm install --save-dev gulp-postcss 
+npm install --save-dev autoprefixer 
 ```
 
 Create `gulpfile.js`:
@@ -108,14 +108,14 @@ gulp.task('css', function () {
       require('tailwindcss'),
       require('autoprefixer'),
     ]))
-    .pipe(gulp.dest('build/'))
+    .pipe(gulp.dest('dist/'))
 })
 ```
 
 Run:
 
 ```sh
-gulp css
+npx gulp css
 ```
 
 Verify the results contain any kind of Tailwind text, such as:

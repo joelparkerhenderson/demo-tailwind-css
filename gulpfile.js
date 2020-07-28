@@ -12,5 +12,5 @@ gulp.task('css', function () {
       // ...
     ]))
     // ...
-    .pipe(gulp.dest('build/'))
+    .pipe(gulp.dest('dist/'))
 })
