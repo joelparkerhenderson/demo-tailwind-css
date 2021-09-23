@@ -90,16 +90,22 @@ npx tailwindcss build src/styles.css -o build/output.css
 Install:
 
 ```sh
-npm install --save-dev gulp-cli
 npm install --save-dev gulp
+npm install --save-dev gulp-all
+npm install --save-dev gulp-cli
 npm install --save-dev gulp-postcss 
-npm install --save-dev autoprefixer 
+npm install --save-dev autoprefixer
+npm install --save-dev pino
 ```
 
 Create `gulpfile.js`:
 
 ```js
+const logger = require('pino')()
+const fs = require('fs');
 const gulp = require('gulp');
+const gulp_all = require('gulp-all')
+logger.info('Gulp...');
 
 gulp.task('css', function () {
   const postcss = require('gulp-postcss')
