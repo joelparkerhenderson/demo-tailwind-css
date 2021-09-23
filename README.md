@@ -24,7 +24,24 @@ curl https://github.com/github/gitignore/blob/master/Node.gitignore -o .gitignor
 npm init -y
 ```
 
-Create any directory names you want for your source files and destination files:
+Create any directory names you want for your input source files and output distribution files:
+
+```sh
+mkdir src
+mkdir build
+```
+
+Create the project:
+
+```sh
+mkdir demo
+cd demo
+git init
+curl https://github.com/github/gitignore/blob/master/Node.gitignore -o .gitignore
+npm init -y
+```
+
+Create any directory names you want for your input source files and output build files:
 
 ```sh
 mkdir src
@@ -34,10 +51,12 @@ mkdir build
 
 ## Add Tailwind
 
-Install:
+
+Install Tailwind and its peer autoprefixer:
 
 ```sh
-npm install tailwindcss
+npm install --save tailwindcss@^2
+npm install --save autoprefixer@^10
 ```
 
 Initialize:
@@ -46,14 +65,31 @@ Initialize:
 npx tailwindcss init
 ```
 
+Output:
+
 ```sh
-   tailwindcss 1.4.6
-  
-   ✅ Created Tailwind config file: tailwind.config.js
+Created Tailwind CSS config file: tailwind.config.js
+```
+
+File:
+
+```js
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
 ```
 
 
 ## Add Tailwind directives
+
 
 Create `src/styles.css` and add Tailwind directives:
 
@@ -70,34 +106,126 @@ h1 {
 
 ## Run Tailwind CLI
 
-For simple projects or for just giving Tailwind a spin, you can use the Tailwind CLI tool to process your CSS:
+For simple projects you can use the Tailwind CLI tool to process your CSS.
+
+Use the `-i` input option and `-o` output option:
 
 ```sh
-npx tailwindcss build src/styles.css -o build/output.css
+npx tailwindcss build -i src/styles.css -o build/styles.css
 ```
 
+Verify the output file contains Tailwind CSS:
+
 ```sh
-   tailwindcss 1.4.6
-  
-   🚀 Building... src/styles.css
-  
-   ✅ Finished in 2.24 s
-   📦 Size: 1.79MB
-   💾 Saved to build/output.css
+cat build/styles.css
+```
+
+
+## Add Tailwind plugins
+
+Tailwind has a variety of optional plugins that we like to use.
+
+Install:
+
+```sh
+npm install @tailwindcss/aspect-ratio
+npm install @tailwindcss/forms
+npm install @tailwindcss/line-clamp
+npm install @tailwindcss/typography
+```
+
+Update the file `tailwind.config.js`:
+
+module.exports = {
+  //…
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/typography'),
+    //…
+  ],
+}
+
+
+### aspect-ratio
+
+[@tailwindcss/aspect-ratio](https://www.npmjs.com/package/tailwindcss-aspect-ratio) : a plugin providing a composable API for giving elements a fixed aspect ratio.
+
+Example configuration using file `tailwind.config.js`:
+
+```js
+module.exports = {
+  theme: {
+    aspectRatio: { 
+      'none': 0,
+      'square': [1, 1],
+      'landscape': [16, 9],
+      'portrait': [9, 16]
+    },
+  //…
+}
+```
+
+Example that shows a square layout:
+
+```html
+<div class="aspect-ratio-square">
+  Lorem ipsum …
+</div>  
+```
+
+
+### forms
+
+[@tailwindcss/forms](https://www.npmjs.com/package/@tailwindcss/forms) : a plugin that provides a basic reset for form styles that makes form elements easy to override with utilities.
+
+Example that shows a rounded red checkbox:
+
+```html
+<input type="checkbox" class="rounded text-red-500" />
+```
+
+
+### line-clamp
+
+[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) :a plugin that provides utilities for visually truncating text after a fixed number of lines.
+
+Example that shows a maximum of two lines of text:
+
+```html
+<p class="line-clamp-2">
+  Lorem ipsum with lots more text …
+</p>
+```
+
+
+### typography
+
+[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) : a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
+
+Example that show the `prose` class that adds sensible styles:
+
+```html
+<article class="prose lg:prose-xl">
+  <h1>Lorum ipsum</h1>
+  <p>Dolor sit amet.</p>
+  <p>Consectetur adipiscing elit.</p>
+</article>
 ```
 
 
 ## Add Gulp, PostCSS, and Tailwind PostCSS plugin
 
-Install:
+Install development tooling:
 
 ```sh
 npm install --save-dev gulp
 npm install --save-dev gulp-all
 npm install --save-dev gulp-cli
-npm install --save-dev gulp-postcss 
-npm install --save-dev autoprefixer
+npm install --save-dev gulp-postcss
 npm install --save-dev pino
+npm install --save-dev npm-check-updates
 ```
 
 Create `gulpfile.js`:
@@ -116,7 +244,7 @@ gulp.task('css', function () {
       require('tailwindcss'),
       require('autoprefixer'),
     ]))
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest('build/'))
 })
 ```
 
@@ -126,12 +254,36 @@ Run:
 npx gulp css
 ```
 
-Verify the results contain any kind of Tailwind text, such as:
+Verify the output file contains Tailwind CSS:
 
 ```sh
-grep -m1 Tailwind build/styles.css
+cat build/styles.css
 ```
 
-```css
- * Tailwind custom reset styles
+
+## Maintenance
+
+
+Update:
+
+```sh
+npm audit fix
+npm --depth 10 --save update
+npx browserslist@latest --update-db
+```
+
+Upgrade:
+
+```sh
+npm update --save
+npx npm-check-updates --upgrade 
+```
+
+Redo:
+
+```sh
+rm package-lock.json 
+rm -rf node_modules 
+npm cache clean --force t
+npm install
 ```
