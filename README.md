@@ -128,10 +128,10 @@ Tailwind has a variety of optional plugins that we like to use.
 Install:
 
 ```sh
-npm install @tailwindcss/aspect-ratio
-npm install @tailwindcss/forms
-npm install @tailwindcss/line-clamp
-npm install @tailwindcss/typography
+npm install --save @tailwindcss/aspect-ratio
+npm install --save @tailwindcss/forms
+npm install --save @tailwindcss/line-clamp
+npm install --save @tailwindcss/typography
 ```
 
 Update the file `tailwind.config.js`:
@@ -243,6 +243,10 @@ gulp.task('css', function () {
     .pipe(postcss([
       require('tailwindcss'),
       require('autoprefixer'),
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/line-clamp'),
+      require('@tailwindcss/typography')
     ]))
     .pipe(gulp.dest('build/'))
 })
@@ -268,14 +272,13 @@ Update:
 
 ```sh
 npm audit fix
-npm --depth 10 --save update
+npm --save update
 npx browserslist@latest --update-db
 ```
 
 Upgrade:
 
 ```sh
-npm update --save
 npx npm-check-updates --upgrade 
 ```
 
