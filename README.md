@@ -121,6 +121,57 @@ cat build/styles.css
 ```
 
 
+## Add Gulp, PostCSS, and Tailwind PostCSS plugin
+
+Install development tooling:
+
+```sh
+npm install --save-dev gulp
+npm install --save-dev gulp-all
+npm install --save-dev gulp-cli
+npm install --save-dev gulp-postcss
+npm install --save-dev pino
+npm install --save-dev npm-check-updates
+```
+
+Create `gulpfile.js`:
+
+```js
+const logger = require('pino')()
+const fs = require('fs');
+const gulp = require('gulp');
+const gulp_all = require('gulp-all')
+logger.info('Gulp...');
+
+gulp.task('css', function () {
+  const postcss = require('gulp-postcss')
+  return gulp.src('src/styles.css')
+    .pipe(postcss([
+      require('tailwindcss'),
+      require('autoprefixer'),
+      require('@tailwindcss/aspect-ratio'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/line-clamp'),
+      require('@tailwindcss/typography')
+    ]))
+    .pipe(gulp.dest('build/'))
+})
+```
+
+Run:
+
+```sh
+npx gulp css
+```
+
+Verify the output file contains Tailwind CSS:
+
+```sh
+cat build/styles.css
+```
+
+
+
 ## Add Tailwind plugins
 
 Tailwind has a variety of optional plugins that we like to use.
@@ -215,53 +266,37 @@ Example that show the `prose` class that adds sensible styles:
 ```
 
 
-## Add Gulp, PostCSS, and Tailwind PostCSS plugin
+## Alpine JS
 
-Install development tooling:
+Alpine is a lightweight JavaScript library for UI/UX effects, such as showing and hiding a div.
 
-```sh
-npm install --save-dev gulp
-npm install --save-dev gulp-all
-npm install --save-dev gulp-cli
-npm install --save-dev gulp-postcss
-npm install --save-dev pino
-npm install --save-dev npm-check-updates
-```
+Alpine is optional. We like it because it helps with effects, and is lighter than jQuery, and easy to add to HTML.
 
-Create `gulpfile.js`:
-
-```js
-const logger = require('pino')()
-const fs = require('fs');
-const gulp = require('gulp');
-const gulp_all = require('gulp-all')
-logger.info('Gulp...');
-
-gulp.task('css', function () {
-  const postcss = require('gulp-postcss')
-  return gulp.src('src/styles.css')
-    .pipe(postcss([
-      require('tailwindcss'),
-      require('autoprefixer'),
-      require('@tailwindcss/aspect-ratio'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/line-clamp'),
-      require('@tailwindcss/typography')
-    ]))
-    .pipe(gulp.dest('build/'))
-})
-```
-
-Run:
+Install Alpine JS:
 
 ```sh
-npx gulp css
+npm install --save-dev alpinejs
 ```
 
-Verify the output file contains Tailwind CSS:
+To use Alpine via CDN, add this to your HTML `<head>` section:
 
-```sh
-cat build/styles.css
+```html
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+```
+
+Example to show or hide a div:
+
+```html
+<div @click.away="open = false" x-data="{ open: false }">
+    <div>
+        <button @click="open = !open">
+            Hello
+        </button>
+    </div>
+    <div x-show="open">
+        World
+    </div>
+</div>
 ```
 
 
