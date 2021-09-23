@@ -278,7 +278,7 @@ Install Alpine JS:
 npm install --save-dev alpinejs
 ```
 
-To use Alpine via CDN, add this to your HTML `<head>` section:
+To use Alpine via CDN, one way is to add this to your HTML `<head>` section:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
