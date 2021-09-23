@@ -1,0 +1,38 @@
+{
+  "name": "demo-tailwind-css",
+  "version": "2.0.0",
+  "description": "Demo Tailwind CSS",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelparkerhenderson/demo-tailwind-css.git"
+  },
+  "keywords": [
+    "demo",
+    "tailwind",
+    "css",
+    "ui",
+    "ux"
+  ],
+  "author": "Joel Parker Henderson (joel@joelparkerhenderson.com)",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/joelparkerhenderson/demo-tailwind-css/issues"
+  },
+  "homepage": "https://github.com/joelparkerhenderson/demo-tailwind-css#readme",
+  "dependencies": {
+    "autoprefixer": "^10.3.5",
+    "tailwindcss": "^2.2.15"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-all": "^1.1.0",
+    "gulp-cli": "^2.3.0",
+    "gulp-postcss": "^9.0.1",
+    "npm-check-updates": "^11.8.5",
+    "pino": "^6.13.3"
+  }
+}
