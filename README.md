@@ -4,6 +4,8 @@ See https://tailwindcss.com/
 
 See https://tailwindui.com/
 
+See [screenshot](README.png)
+
 
 ## Setup
 
