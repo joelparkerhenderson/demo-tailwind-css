@@ -209,7 +209,7 @@ See the demo file with HTML code that uses the plugins as described below:
 
 ```html
 <form>
-  <input type="checkbox" class="rounded text-red-500" />
+  <input type="checkbox" class="rounded-full text-red-500" />
 </form>
 ```
 
