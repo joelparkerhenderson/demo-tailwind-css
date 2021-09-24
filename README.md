@@ -38,7 +38,7 @@ This is a demonstration of:
 
 ## Setup
 
-If you're new to Node, Gulp, or PostCSS, then first see [demo_gulp_postcss_autoprefixer](https://github.com/joelparkerhenderson/demo_gulp_postcss_autoprefixer)
+If you're new to Node, Gulp, or PostCSS, then you may want to first read our demo of these: [demo-gulp-postcss-autoprefixer](https://github.com/joelparkerhenderson/demo-gulp-postcss-autoprefixer)
 
 Create the project:
 
