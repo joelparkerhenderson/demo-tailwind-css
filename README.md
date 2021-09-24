@@ -213,7 +213,7 @@ See the demo file with HTML code that uses the plugins as described below:
 </form>
 ```
 
-[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) - a plugin that provides utilities for visually truncating text after a fixed number of lines, for example:
+[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) is a plugin that provides utilities for visually truncating text after a fixed number of lines, for example:
 
 ```html
 <p class="line-clamp-2">
@@ -221,7 +221,7 @@ See the demo file with HTML code that uses the plugins as described below:
 </p>
 ```
 
-[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) - a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS), for example:
+[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) is a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS), for example:
 
 ```html
 <article class="prose lg:prose-xl">
