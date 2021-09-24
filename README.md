@@ -4,7 +4,6 @@
 
 This is a demonstration of 
 [Tailwind CSS](https://tailwindcss.com/), 
-[Tailwind UI](https://tailwindui.com/), 
 [Gulp.js](https://gulpjs.com/), 
 [Alpine.js](https://alpinejs.dev/), 
 and more.
@@ -28,8 +27,6 @@ Contents:
 This is a demonstration of:
 
 * [Tailwind CSS](https://tailwindcss.com/) utility-first style framework
-
-* [Tailwind UI](https://tailwindui.com/) collection of UI components
 
 * [Gulp.js](https://gulpjs.com/) toolkit to automate workflows
 
