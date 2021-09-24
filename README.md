@@ -1,10 +1,16 @@
 # Demo Tailwind CSS
 
-See https://tailwindcss.com/
+<img src="README.png" alt="Objective" style="width: 100%;"/>
 
-See https://tailwindui.com/
+Demonstration of:
 
-See [screenshot](README.png)
+* [Tailwind CSS](https://tailwindcss.com/) utility-first style framework
+
+* [Tailwind UI](https://tailwindui.com/) collection of UI components
+
+* [Gulp.js](https://gulpjs.com/) toolkit to automate workflows
+
+* [Alpine.js](https://alpinejs.dev/) minimal framework for DOM updates
 
 
 ## Setup
@@ -121,55 +127,30 @@ cat build/styles.css
 ```
 
 
-## Add Gulp, PostCSS, and Tailwind PostCSS plugin
+## Create HTML
 
-Install development tooling:
+Create a demonstration HTML file, such as `src/demo.html`, with some demo code, such as red text:
+
+```html
+<html>
+    <head>
+        <title>Demo Tailwind CSS</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <p class="text-red-500">This is a demo.</p>
+    </body>
+</html>
+```
+
+Copy the file to the output build directory, such as:
 
 ```sh
-npm install --save-dev gulp
-npm install --save-dev gulp-all
-npm install --save-dev gulp-cli
-npm install --save-dev gulp-postcss
-npm install --save-dev pino
-npm install --save-dev npm-check-updates
+cp src/demo.html build/demo.html
 ```
 
-Create `gulpfile.js`:
-
-```js
-const logger = require('pino')()
-const fs = require('fs');
-const gulp = require('gulp');
-const gulp_all = require('gulp-all')
-logger.info('Gulp...');
-
-gulp.task('css', function () {
-  const postcss = require('gulp-postcss')
-  return gulp.src('src/styles.css')
-    .pipe(postcss([
-      require('tailwindcss'),
-      require('autoprefixer'),
-      require('@tailwindcss/aspect-ratio'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/line-clamp'),
-      require('@tailwindcss/typography')
-    ]))
-    .pipe(gulp.dest('build/'))
-})
-```
-
-Run:
-
-```sh
-npx gulp css
-```
-
-Verify the output file contains Tailwind CSS:
-
-```sh
-cat build/styles.css
-```
-
+You can open the file in any typical web browser. You will 
+We will automate the workflow next.
 
 
 ## Add Tailwind plugins
@@ -179,7 +160,6 @@ Tailwind has a variety of optional plugins that we like to use.
 Install:
 
 ```sh
-npm install --save @tailwindcss/aspect-ratio
 npm install --save @tailwindcss/forms
 npm install --save @tailwindcss/line-clamp
 npm install --save @tailwindcss/typography
@@ -190,7 +170,6 @@ Update the file `tailwind.config.js`:
 module.exports = {
   //…
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
@@ -198,33 +177,9 @@ module.exports = {
   ],
 }
 
+Demo plugins HTML file that shows code as described below:
 
-### aspect-ratio
-
-[@tailwindcss/aspect-ratio](https://www.npmjs.com/package/tailwindcss-aspect-ratio) : a plugin providing a composable API for giving elements a fixed aspect ratio.
-
-Example configuration using file `tailwind.config.js`:
-
-```js
-module.exports = {
-  theme: {
-    aspectRatio: { 
-      'none': 0,
-      'square': [1, 1],
-      'landscape': [16, 9],
-      'portrait': [9, 16]
-    },
-  //…
-}
-```
-
-Example that shows a square layout:
-
-```html
-<div class="aspect-ratio-square">
-  Lorem ipsum …
-</div>  
-```
+* [demo-plugins.html](demo-plugins.html)
 
 
 ### forms
@@ -234,7 +189,9 @@ Example that shows a square layout:
 Example that shows a rounded red checkbox:
 
 ```html
-<input type="checkbox" class="rounded text-red-500" />
+<form>
+  <input type="checkbox" class="rounded text-red-500" />
+</form>
 ```
 
 
@@ -266,9 +223,75 @@ Example that show the `prose` class that adds sensible styles:
 ```
 
 
+## Add Gulp, PostCSS, and workflow tooling
+
+
+Install:
+
+```sh
+npm install --save-dev gulp
+npm install --save-dev gulp-all
+npm install --save-dev gulp-cli
+npm install --save-dev gulp-postcss
+npm install --save-dev pino
+npm install --save-dev npm-check-updates
+```
+
+Create `gulpfile.js`:
+
+```js
+const logger = require('pino')()
+const fs = require('fs');
+const gulp = require('gulp');
+const gulp_all = require('gulp-all')
+logger.info('Gulp...');
+
+gulp.task('default', ['css', 'html']);
+
+gulp.task('css', function () {
+  const postcss = require('gulp-postcss')
+  return gulp.src('./src/**/*.css')
+    .pipe(postcss([
+      require('tailwindcss'),
+      require('autoprefixer'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/line-clamp'),
+      require('@tailwindcss/typography')
+    ]))
+    .pipe(gulp.dest('build/'))
+})
+
+gulp.task('html', function() {
+    return gulp.src('./src/**/*.html')
+      .pipe(gulp.dest('build/'))
+});
+```
+
+Remove any existing build files:
+
+```sh
+rm build/*
+```
+
+Run:
+
+```sh
+npx gulp
+```
+
+Verify the output build directory includes the styles CSS file and demo HTML file:
+
+```sh
+cat build/styles.css
+cat build/demo.html
+```
+
+
 ## Alpine JS
 
 Alpine is a lightweight JavaScript library for UI/UX effects, such as showing and hiding a div.
+
+See https://alpinejs.dev/
 
 Alpine is optional. We like it because it helps with effects, and is lighter than jQuery, and easy to add to HTML.
 
