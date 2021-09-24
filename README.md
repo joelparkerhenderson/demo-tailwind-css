@@ -2,7 +2,34 @@
 
 <img src="README.png" alt="Objective" style="width: 100%;"/>
 
-Demonstration of:
+This is a demonstration of 
+[Tailwind CSS](https://tailwindcss.com/), 
+[Tailwind UI](https://tailwindui.com/), 
+[Gulp.js](https://gulpjs.com/), 
+[Alpine.js](https://alpinejs.dev/), 
+and more.
+
+Contents:
+
+* [Introduction](#introduction)
+* [Setup](#setup)
+  * [Create a project](#create-a-project)
+* [Add Tailwind](#add-tailwind)
+* [Add Tailwind directives](#add-tailwind-directives)
+* [Run Tailwind CLI](#run-tailwind-cli)
+* [Create HTML](#create-html)
+* [Add Tailwind plugins](#add-tailwind-plugins)
+  * [forms](#forms)
+  * [line-clamp](#line-clamp)
+  * [typography](#typography)
+* [Add Gulp, PostCSS, and workflow tooling](#add-gulp-postcss-and-workflow-tooling)
+* [Alpine JS](#alpine-js)
+* [Maintenance](#maintenance)
+
+
+## Introduction
+
+This is a demonstration of:
 
 * [Tailwind CSS](https://tailwindcss.com/) utility-first style framework
 
