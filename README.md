@@ -167,6 +167,7 @@ npm install --save @tailwindcss/typography
 
 Update the file `tailwind.config.js`:
 
+```js
 module.exports = {
   //…
   plugins: [
@@ -176,6 +177,7 @@ module.exports = {
     //…
   ],
 }
+```
 
 Demo plugins HTML file that shows code as described below:
 
