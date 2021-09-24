@@ -13,15 +13,11 @@ Contents:
 
 * [Introduction](#introduction)
 * [Setup](#setup)
-  * [Create a project](#create-a-project)
 * [Add Tailwind](#add-tailwind)
 * [Add Tailwind directives](#add-tailwind-directives)
 * [Run Tailwind CLI](#run-tailwind-cli)
-* [Create HTML](#create-html)
+* [View Tailwind using HTML](#view-tailwind-using-html)
 * [Add Tailwind plugins](#add-tailwind-plugins)
-  * [forms](#forms)
-  * [line-clamp](#line-clamp)
-  * [typography](#typography)
 * [Add Gulp, PostCSS, and workflow tooling](#add-gulp-postcss-and-workflow-tooling)
 * [Alpine JS](#alpine-js)
 * [Maintenance](#maintenance)
@@ -41,9 +37,6 @@ This is a demonstration of:
 
 
 ## Setup
-
-
-### Create a project
 
 If you're new to Node, Gulp, or PostCSS, then first see [demo_gulp_postcss_autoprefixer](https://github.com/joelparkerhenderson/demo_gulp_postcss_autoprefixer)
 
@@ -84,7 +77,6 @@ mkdir build
 
 ## Add Tailwind
 
-
 Install Tailwind and its peer autoprefixer:
 
 ```sh
@@ -123,8 +115,7 @@ module.exports = {
 
 ## Add Tailwind directives
 
-
-Create `src/styles.css` and add Tailwind directives:
+Create file `src/styles.css` and add Tailwind directives:
 
 ```css
 @tailwind base;
@@ -154,9 +145,9 @@ cat build/styles.css
 ```
 
 
-## Create HTML
+## View Tailwind using HTML
 
-Create a demonstration HTML file, such as `src/demo.html`, with some demo code, such as red text:
+Create a demonstration HTML file, such as file `src/demo.html`, with some demo code, such as red text:
 
 ```html
 <html>
@@ -214,12 +205,7 @@ See the demo file with HTML code that uses the plugins as described below:
 
 * [src/demo-plugins.html](src/demo-plugins.html)
 
-
-### forms
-
-[@tailwindcss/forms](https://www.npmjs.com/package/@tailwindcss/forms) - a plugin that provides a basic reset for form styles that makes form elements easy to override with utilities.
-
-Example that shows a rounded red checkbox:
+[@tailwindcss/forms](https://www.npmjs.com/package/@tailwindcss/forms) is a plugin that provides a basic reset for form styles that makes form elements easy to override with utilities, for example:
 
 ```html
 <form>
@@ -227,12 +213,7 @@ Example that shows a rounded red checkbox:
 </form>
 ```
 
-
-### line-clamp
-
-[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) - a plugin that provides utilities for visually truncating text after a fixed number of lines.
-
-Example that shows a maximum of two lines of text:
+[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) - a plugin that provides utilities for visually truncating text after a fixed number of lines, for example:
 
 ```html
 <p class="line-clamp-2">
@@ -240,12 +221,7 @@ Example that shows a maximum of two lines of text:
 </p>
 ```
 
-
-### typography
-
-[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) - a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
-
-Example that show the `prose` class that adds sensible styles:
+[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) - a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS), for example:
 
 ```html
 <article class="prose lg:prose-xl">
