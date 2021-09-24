@@ -32,6 +32,8 @@ This is a demonstration of:
 
 * [Alpine.js](https://alpinejs.dev/) minimal framework for DOM updates
 
+Tailwind, Gulp, and Alpine all have excellent documentation areas, and we suggest you read them. This page is our work to show how all of these relate and work together to build HTML pages and CSS styles.
+
 
 ## Setup
 
