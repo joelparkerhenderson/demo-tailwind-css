@@ -143,7 +143,11 @@ Create a demonstration HTML file, such as `src/demo.html`, with some demo code, 
 </html>
 ```
 
-Copy the file to the output build directory, such as:
+If you prefer, use the demo file in this repo:
+
+* [src/demo.html](src/demo.html)
+
+Copy the demo file to the output build directory, such as:
 
 ```sh
 cp src/demo.html build/demo.html
@@ -179,9 +183,9 @@ module.exports = {
 }
 ```
 
-Demo plugins HTML file that shows code as described below:
+See the demo file with HTML code that uses the plugins as described below:
 
-* [demo-plugins.html](demo-plugins.html)
+* [src/demo-plugins.html](src/demo-plugins.html)
 
 
 ### forms
