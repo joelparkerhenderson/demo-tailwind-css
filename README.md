@@ -190,7 +190,7 @@ See the demo file with HTML code that uses the plugins as described below:
 
 ### forms
 
-[@tailwindcss/forms](https://www.npmjs.com/package/@tailwindcss/forms) : a plugin that provides a basic reset for form styles that makes form elements easy to override with utilities.
+[@tailwindcss/forms](https://www.npmjs.com/package/@tailwindcss/forms) - a plugin that provides a basic reset for form styles that makes form elements easy to override with utilities.
 
 Example that shows a rounded red checkbox:
 
@@ -203,7 +203,7 @@ Example that shows a rounded red checkbox:
 
 ### line-clamp
 
-[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) :a plugin that provides utilities for visually truncating text after a fixed number of lines.
+[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) - a plugin that provides utilities for visually truncating text after a fixed number of lines.
 
 Example that shows a maximum of two lines of text:
 
@@ -216,7 +216,7 @@ Example that shows a maximum of two lines of text:
 
 ### typography
 
-[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) : a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
+[@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) - a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
 
 Example that show the `prose` class that adds sensible styles:
 
