@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const logger = require('pino')()
+logger.info('Gulp and pino are working...');
 
 /// Gulp tasks that each do one thing
 
