@@ -42,6 +42,7 @@ function js(cb) {
 function watch(cb) {
   gulp.watch('./src/**/*.css', gulp.series('css'));
   gulp.watch('./src/**/*.html', gulp.series('html'));
+  gulp.watch('./src/**/*.jpg', gulp.series('jpg'));
   gulp.watch('./src/**/*.js', gulp.series('js'));
   cb();
 }
@@ -50,6 +51,7 @@ function watch(cb) {
 
 gulp.task('css', css);
 gulp.task('html', html);
+gulp.task('jpg', html);
 gulp.task('js', html);
 gulp.task('watch', watch);
 
