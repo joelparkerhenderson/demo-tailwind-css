@@ -1,18 +1,59 @@
 const gulp = require('gulp');
 
-// gulp.task('default', ['css', 'html']);
+/// Gulp tasks that each do one thing
 
-gulp.task('css', function () {
+function css(cb) {
   const postcss = require('gulp-postcss')
-  return gulp.src('./src/**/*.css')
+  gulp
+    .src('./src/**/*.css')
     .pipe(postcss([
       require('tailwindcss'),
       require('autoprefixer'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/typography')
     ]))
-    .pipe(gulp.dest('build/'))
-})
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
 
-gulp.task('html', function() {
-    return gulp.src('./src/**/*.html')
-      .pipe(gulp.dest('build/'))
-});
+function html(cb) {
+  gulp
+    .src('./src/**/*.html')
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
+
+function jpg(cb) {
+  gulp
+    .src('./src/**/*.jpg')
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
+
+function js(cb) {
+  gulp
+    .src('./src/**/*.js')
+    .pipe(gulp.dest('dist/'));
+    cb();
+}
+
+/// Gulp tasks that each combine other tasks
+
+function watch(cb) {
+  gulp.watch('./src/**/*.css', gulp.series('css'));
+  gulp.watch('./src/**/*.html', gulp.series('html'));
+  gulp.watch('./src/**/*.js', gulp.series('js'));
+  cb();
+}
+
+/// Gulp task names
+
+gulp.task('css', css);
+gulp.task('html', html);
+gulp.task('js', html);
+gulp.task('watch', watch);
+
+// Gulp tasks defined by exports
+
+exports.build = gulp.parallel(css, html, jpg, js);
+exports.default = gulp.parallel(css, html, jpg, js, watch);
