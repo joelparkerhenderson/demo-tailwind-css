@@ -32,7 +32,7 @@ This is a demonstration of:
 
 * [Alpine.js](https://alpinejs.dev/) minimal framework for DOM updates
 
-Tailwind, Gulp, and Alpine all have excellent documentation areas, and we suggest you read them. This page is our work to show how all of these relate and work together to build HTML pages and CSS styles.
+Tailwind, Gulp, and Alpine all have excellent documentation areas, and we suggest you read them. This page is our work to show how all of these relate and work together to create HTML pages and CSS styles.
 
 
 ## Setup
@@ -53,24 +53,7 @@ Create any directory names you want for your input source files and output distr
 
 ```sh
 mkdir src
-mkdir build
-```
-
-Create the project:
-
-```sh
-mkdir demo
-cd demo
-git init
-curl https://github.com/github/gitignore/blob/master/Node.gitignore -o .gitignore
-npm init -y
-```
-
-Create any directory names you want for your input source files and output build files:
-
-```sh
-mkdir src
-mkdir build
+mkdir dist
 ```
 
 
@@ -79,8 +62,8 @@ mkdir build
 Install Tailwind and its peer autoprefixer:
 
 ```sh
-npm install --save tailwindcss@^2
-npm install --save autoprefixer@^10
+npm install --save-dev tailwindcss@^3.0.24
+npm install --save-dev autoprefixer@@^10.4.4 
 ```
 
 Initialize:
@@ -95,16 +78,24 @@ Output:
 Created Tailwind CSS config file: tailwind.config.js
 ```
 
-File:
+File `tailwind.config.js` is:
 
 ```js
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: [],
   theme: {
     extend: {},
   },
-  variants: {
+  plugins: [],
+}
+```
+
+Edit to add content:
+
+```js
+module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
     extend: {},
   },
   plugins: [],
@@ -112,18 +103,15 @@ module.exports = {
 ```
 
 
+
 ## Add Tailwind directives
 
-Create file `src/styles.css` and add Tailwind directives:
+Create file `src/style.css` and add Tailwind directives:
 
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-h1 {
-    color: red;
-}
 ```
 
 
@@ -134,13 +122,13 @@ For simple projects you can use the Tailwind CLI tool to process your CSS.
 Use the `-i` input option and `-o` output option:
 
 ```sh
-npx tailwindcss build -i src/styles.css -o build/styles.css
+npx tailwindcss -i ./src/style.css -o ./dist/style.css --watch
 ```
 
 Verify the output file contains Tailwind CSS:
 
 ```sh
-cat build/styles.css
+cat dist/style.css
 ```
 
 
@@ -149,13 +137,17 @@ cat build/styles.css
 Create a demonstration HTML file, such as file `src/demo.html`, with some demo code, such as red text:
 
 ```html
+<!doctype html>
 <html>
     <head>
+        <base href="">
+        <meta charset="UTF-8">
         <title>Demo Tailwind CSS</title>
-        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <p class="text-red-500">This is a demo.</p>
+        <p class="text-3xl font-bold underline">This is a demo.</p>
     </body>
 </html>
 ```
@@ -164,10 +156,10 @@ If you prefer, use the demo file in this repo:
 
 * [src/demo.html](src/demo.html)
 
-Copy the demo file to the output build directory, such as:
+Copy the demo file from the source diretory to the distribution directory, such as:
 
 ```sh
-cp src/demo.html build/demo.html
+cp src/demo.html dist/demo.html
 ```
 
 You can open the file in any typical web browser. You will 
@@ -181,9 +173,8 @@ Tailwind has a variety of optional plugins that we like to use.
 Install:
 
 ```sh
-npm install --save @tailwindcss/forms
-npm install --save @tailwindcss/line-clamp
-npm install --save @tailwindcss/typography
+npm install --save-dev @tailwindcss/forms
+npm install --save-dev @tailwindcss/typography
 ```
 
 Update the file `tailwind.config.js`:
@@ -193,7 +184,6 @@ module.exports = {
   //…
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
     //…
   ],
@@ -212,14 +202,6 @@ See the demo file with HTML code that uses the plugins as described below:
 </form>
 ```
 
-[@tailwindcss/line-clamp](https://www.npmjs.com/package/@tailwindcss/line-clamp) is a plugin that provides utilities for visually truncating text after a fixed number of lines, for example:
-
-```html
-<p class="line-clamp-2">
-  Lorem ipsum with lots more text …
-</p>
-```
-
 [@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography) is a plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS), for example:
 
 ```html
@@ -231,54 +213,107 @@ See the demo file with HTML code that uses the plugins as described below:
 ```
 
 
-## Add Gulp, PostCSS, and workflow tooling
+## Install Gulp 4
 
+<https://gulpjs.com>
 
-Install:
+Gulp is toolkit to automate & enhance your workflow. You can leverage gulp and
+the flexibility of JavaScript to automate slow, repetitive workflows and compose
+them into efficient build pipelines.
+
+Install Gulp into the project:
 
 ```sh
-npm install --save-dev gulp
-npm install --save-dev gulp-all
-npm install --save-dev gulp-cli
-npm install --save-dev gulp-postcss
-npm install --save-dev pino
-npm install --save-dev npm-check-updates
+npm install --save-dev gulp@4
 ```
 
-Create `gulpfile.js`:
+Create file `gulpfile.js` with this:
 
 ```js
-const logger = require('pino')()
-const fs = require('fs');
-const gulp = require('gulp');
-const gulp_all = require('gulp-all')
-logger.info('Gulp...');
+function defaultTask(cb) {
+  // place code for your default task here
+  cb();
+}
 
-gulp.task('default', ['css', 'html']);
-
-gulp.task('css', function () {
-  const postcss = require('gulp-postcss')
-  return gulp.src('./src/**/*.css')
-    .pipe(postcss([
-      require('tailwindcss'),
-      require('autoprefixer'),
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/line-clamp'),
-      require('@tailwindcss/typography')
-    ]))
-    .pipe(gulp.dest('build/'))
-})
-
-gulp.task('html', function() {
-    return gulp.src('./src/**/*.html')
-      .pipe(gulp.dest('build/'))
-});
+exports.default = defaultTask
 ```
 
-Remove any existing build files:
+If you ever want to use Gulp promises with private functions:
 
 ```sh
-rm build/*
+npm install --save-dev gulp-all
+```
+
+
+## Install Gulp CLI 2
+
+Gulp CLI is the Gulp command line interface tool. We prefer to install Gulp CLI globally
+
+Install Gulp CLI:
+
+```sh
+npm install --global gulp-cli@2
+```
+
+Verify Gulp is working by running:
+
+```sh
+gulp
+```
+
+You should see output that shows Gulp diagnostics.
+
+
+## Create Gulp tasks
+
+Edit file `gulpfile.js` and add these typical tasks:
+
+```js
+const gulp = require('gulp');
+
+function css(cb) {
+  gulp
+    .src('./src/**/*.css')
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
+
+function html(cb) {
+  gulp
+    .src('./src/**/*.html')
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
+
+exports.css = gulp.series(css);
+exports.html = gulp.series(html);
+
+exports.build = gulp.parallel(css, html);
+exports.default = gulp.parallel(css, html);
+```
+
+Run this to verify:
+
+```sh
+gulp
+```
+
+You should see output that shows Gulp calling the tasks 'css' and 'html':
+
+```sh
+Using gulpfile …/gulpfile.js
+Starting 'default'...
+Starting 'css'...
+Starting 'html'...
+Finished 'css' after 3.86 ms
+Finished 'html' after 6 ms
+Finished 'default' after 15 ms
+```
+
+Remove any existing distribution files:
+
+```sh
+rm dist/*
 ```
 
 Run:
@@ -287,11 +322,109 @@ Run:
 npx gulp
 ```
 
-Verify the output build directory includes the styles CSS file and demo HTML file:
+Verify the distribution directory includes the style CSS file and demo HTML file:
 
 ```sh
-cat build/styles.css
-cat build/demo.html
+ls dist
+```
+
+Output:
+
+```sh
+index.html
+style.css
+```
+
+
+## Add PostCSS
+
+PostCSS is a post-processor for cascading style sheets.
+
+Install:
+
+```sh
+npm install --save-dev gulp-postcss@^9.0.1
+```
+
+If you also want the PostCSS command line interface:
+
+```sh
+npm install --save-dev postcss-cli@^8.3.1
+```
+
+Edit `gulpfile.js` to replace the function `css` with this:
+
+```js
+function css(cb) {
+  const postcss = require('gulp-postcss')
+  gulp
+    .src('./src/**/*.css')
+    .pipe(postcss([
+      require('tailwindcss'),
+      require('autoprefixer'),
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/typography')
+    ]))
+    .pipe(gulp.dest('dist/'));
+  cb();
+}
+```
+
+Run:
+
+```sh
+npx gulp
+```
+
+Verify the distribution style.css file has a bunch of Tailwind code in it:
+
+```sh
+cat dist/style.css
+```
+
+Output:
+
+```text
+/*
+! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
+*/
+…
+```
+
+## Add logging (optional)
+
+We like to use logging in our projects, in order to help with diagnostics, troubleshooting, etc.
+
+For simple logging, we like the use the `pino` package.
+
+Install:
+
+```sh
+npm install --save-dev pino
+```
+
+Edit `gulpfile.js` and add:
+
+```js
+const logger = require('pino')()
+logger.info('Gulp and pino are working...');
+```
+
+Run:
+
+```sh
+npx gulp
+```
+
+You should see output that includes the logger info.
+
+
+## Add workflow tooling
+
+Install:
+
+```sh
+npm install --save-dev npm-check-updates
 ```
 
 
