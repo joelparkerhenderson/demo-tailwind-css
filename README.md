@@ -63,7 +63,7 @@ Install Tailwind and its peer autoprefixer:
 
 ```sh
 npm install --save-dev tailwindcss@^3.0.24
-npm install --save-dev autoprefixer@@^10.4.4 
+npm install --save-dev autoprefixer@^10.4.4
 ```
 
 Initialize:
@@ -439,7 +439,7 @@ Alpine is optional. We like it because it helps with effects, and is lighter tha
 Install Alpine JS:
 
 ```sh
-npm install --save-dev alpinejs
+npm install --save-dev alpinejs@^3.10.1
 ```
 
 To use Alpine via CDN, one way is to add this to your HTML `<head>` section:
