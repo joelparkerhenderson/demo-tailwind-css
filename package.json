@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "alpinejs": "^3.9.6",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-all": "^1.1.0",
-    "gulp-cli": "^2.3.0",
+    "gulp-cli": "^3.0.0",
     "gulp-postcss": "^9.0.1",
     "npm-check-updates": "^16.4.3",
     "pino": "^7.10.0"
